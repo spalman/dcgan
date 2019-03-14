@@ -17,7 +17,7 @@ DCGAN consists of two networks:
 ~~Space for computational graph image~~
 ## Results
 Unfortunately my ancient PC(i5-2500 +GTX 560) can't handle training process with CUDA. So, here is some results after going thru 3200 batches on CPU (~20 epochs).
-![giphy!](https://gph.is/g/Z8kPpda)
+![giphy!](https://media.giphy.com/media/7Tf06heNNYeXDgYgVA/giphy.gif)
 ~~Will also try to run it on GCP when there will be available compute engines with GPU.~~
 
 ## Run train process
