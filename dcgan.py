@@ -28,11 +28,13 @@ parser.add_argument('--latent_dim', type=int, default=100, help='dimensionality 
 parser.add_argument('--img_size', type=int, default=32, help='size of each image dimension')
 parser.add_argument('--channels', type=int, default=1, help='number of image channels')
 parser.add_argument('--sample_interval', type=int, default=400, help='interval between image sampling')
+parser.add_argument('--save_epoch', type=int, default=10, help='interval between model checkpoints')
 opt = parser.parse_args()
 print(opt)
 
-#cuda = True if torch.cuda.is_available() else False
-cuda = False
+cuda = True if torch.cuda.is_available() else False
+#cuda = False
+
 def weights_init_normal(m):
     classname = m.__class__.__name__
     if classname.find('Conv') != -1:
@@ -195,9 +197,9 @@ for epoch in range(opt.n_epochs):
         if batches_done % opt.sample_interval == 0:
             save_image(gen_imgs.data[:25], 'images/%d.png' % batches_done, nrow=5, normalize=True)
         
-        if epoch % 10 == 0:
-            if not os.path.exists('./model/'):
-                os.makedirs('./model')
+        if epoch % opt.save_epoch == 0:
+            if not os.path.exists('./model_checkpoints/'):
+                os.makedirs('./model_checkpoints')
             torch.save({
             'generator_state_dict': generator.state_dict(),
             'discriminator_state_dict': discriminator.state_dict(),
